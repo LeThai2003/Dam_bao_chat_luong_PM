@@ -17,6 +17,11 @@ const orderSchema = new mongoose.Schema(
         quantity: Number,
       },
     ],
+    status: {
+      type: String,
+      enum: ['Created', 'Confirmed', 'Processing', 'Shipping', 'Delivered', 'Cancelled-Admin', 'Cancelled-Client'], // Khởi tạo, Đã xác nhận (admin thấy đơn), Đang xử lý (Chuẩn bị, đóng gói), Đang giao hàng, Đã giao hàng, Đã hủy
+      default: 'Created'
+    }
   },
   {
     timestamps: true,

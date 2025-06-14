@@ -1,0 +1,79 @@
+extends ../../layouts/default.pug
+include ../../mixins/box-head.pug
+
+block main
+  .container.my-3
+    .row
+      .col-12
+        +box-head("Chi tiết đơn hàng")
+
+    if(order)
+      .row
+        .col-12
+          h4(class="mb-2") Thông tin cá nhân
+          table(class="table table-bordered")
+            tbody
+              tr
+                td Họ tên
+                td
+                  b #{order.userInfo.fullName}
+              tr
+                td Số điện thoại
+                td
+                  b #{order.userInfo.phone}
+              tr
+                td Địa chỉ
+                td
+                  b #{order.userInfo.address}
+
+      .row
+        .col-12
+          h4(class="mb-2") Thông tin đơn hàng
+
+          table(class="table table-bordered")
+            thead
+              tr
+                th STT
+                th Ảnh
+                th Tên
+                th Giá
+                th Số lượng
+                th Tổng tiền
+            tbody
+              if(order.products.length > 0)
+                each item, index in order.products
+                  tr
+                    td #{index + 1}
+                    td
+                      img(
+                        src=item.thumbnail
+                        alt=item.title
+                        width="80px"
+                      )
+                    td #{item.title}
+                    td #{Number(item.price).toLocaleString()}đ
+                    td #{item.quantity}
+                    td #{Number(item.totalPrice).toLocaleString()}đ
+
+
+          if(order.products.length > 0)
+            h3(class="text-right") Tổng đơn hàng: #{Number(order.totalPrice).toLocaleString()}đ
+
+          
+          div(class="d-flex align-items-center justify-content-end") 
+            div(class="d-flex mr-2") 
+              button.btn.btn-warning #{order.statusVi}
+
+            if(cancleEnable)
+              a(href="javascript:;")
+                button(
+                  class="btn btn-danger my-2"
+                  button-cancle-order
+                ) Hủy đơn
+
+  form(
+    form-cancle-order
+    action=`/orders/update-status/${order._id}?_method=PATCH`
+    method="POST"
+  )
+    

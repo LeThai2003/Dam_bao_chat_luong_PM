@@ -118,3 +118,35 @@ if(uploadImage) {
   });
 }
 // End Preview Image
+
+// Orders table
+const tableOrders = document.querySelectorAll('table[table-orders]');
+if(tableOrders.length > 0)
+{
+  tableOrders.forEach(table => {
+    const rows = table.querySelectorAll('tr');
+    rows.forEach(row =>
+      row.addEventListener("click", () => {
+        const orderId = row.getAttribute("orderId");
+        window.location.href = `/orders/detail/${orderId}`;
+      })
+    )
+  })
+}
+// End orders table
+
+
+// Button cancle order
+const buttonCancleOrder = document.querySelector("button[button-cancle-order]");
+if(buttonCancleOrder)
+{
+  const formCancleOrder = document.querySelector("form[form-cancle-order]");
+  console.log(formCancleOrder);
+  if(formCancleOrder)
+  {
+    buttonCancleOrder.addEventListener("click", () => {
+      formCancleOrder.submit();
+    })
+  }
+}
+// End button cancle order
