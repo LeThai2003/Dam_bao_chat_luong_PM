@@ -1,0 +1,85 @@
+extends ../../layouts/default.pug
+include ../../mixins/box-head.pug
+include ../../mixins/sort.pug
+include ../../mixins/pagination.pug
+include ../../mixins/search.pug
+include ../../mixins/moment.pug
+
+block main
+  .container.my-2
+    .row
+      .col-12
+        +box-head("Đơn hàng")
+
+    
+    h5.mb-3 Đơn hàng đang đợi 
+    .row 
+      if ordersRecent.length > 0
+        .col-12
+          table(
+            class="table table-hover table-sm"
+            table-orders
+          )
+            thead
+              tr
+                th STT
+                th Mã đơn
+                th Người đặt
+                th Địa chỉ
+                th Ngày đặt 
+                th Tổng tiền 
+                th Trạng thái
+
+            tbody
+              each item, index in ordersRecent
+                tr(orderId=item._id)
+                  td #{index+1}
+                  td #{item._id}
+                  td #{item.userInfo.fullName}
+                  td #{item.userInfo.address}
+                  td 
+                    +formatDate(item.createdAt)
+                  td #{Number(item.totalPrice).toLocaleString()}đ
+                  td 
+                    b #{item.statusVi}
+
+      else 
+        div(class="col-12")
+          p(class="alert alert-warning") Không có đơn hàng nào.
+
+    hr
+
+    h5.mb-3 Đơn hàng đã kết thúc
+    .row 
+      if ordersHistory.length > 0
+        .col-12
+          table(
+            class="table table-hover table-sm"
+            table-orders
+          )
+            thead
+              tr
+                th STT
+                th Mã đơn
+                th Người đặt
+                th Địa chỉ
+                th Ngày đặt 
+                th Tổng tiền 
+                th Trạng thái
+
+            tbody
+              each item, index in ordersHistory
+                tr(orderId=item._id)
+                  td #{index+1}
+                  td #{item._id}
+                  td #{item.userInfo.fullName}
+                  td #{item.userInfo.address}
+                  td 
+                    +formatDate(item.createdAt)
+                  td #{Number(item.totalPrice).toLocaleString()}đ
+                  td 
+                    b #{item.statusVi}
+
+      else 
+        div(class="col-12")
+          p(class="alert alert-warning") Không có đơn hàng nào.
