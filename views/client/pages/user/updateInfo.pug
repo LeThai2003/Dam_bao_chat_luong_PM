@@ -1,0 +1,89 @@
+extends ../../layouts/default.pug
+include ../../mixins/box-head.pug
+include ../../mixins/alert.pug
+
+block main
+  .container.my-3
+    h2(class="mb-4") Cập nhật tài khoản
+
+    +alert-success(5000)
+    +alert-error(5000)
+
+    .row.mx-1
+      form(
+        action=`/user/update-info?_method=PATCH`
+        method="POST"
+        enctype="multipart/form-data"
+      )
+        div(class="form-group")
+          label(for="fullName") Họ tên *
+          input(
+            type="text"
+            class="form-control"
+            id="fullName"
+            name="fullName"
+            required
+            value=infoUser.fullName
+          )
+        //- div(class="form-group")
+        //-   label(for="email") Email *
+        //-   input(
+        //-     type="email"
+        //-     class="form-control"
+        //-     id="email"
+        //-     name="email"
+        //-     required
+        //-     value=infoUser.email
+        //-   )
+        
+        //- div(class="form-group")
+        //-   label(for="password") Mật khẩu
+        //-   input(
+        //-     type="password"
+        //-     class="form-control"
+        //-     id="password"
+        //-     name="password"
+        //-   )
+        div(
+          class="form-group"
+          upload-image
+        )
+          label(for="avatar") Avatar
+          input(
+            type="file"
+            class="form-control-file"
+            id="avatar"
+            name="avatar"
+            accept="image/*"
+            upload-image-input
+          )
+          img(
+            src=infoUser.avatar
+            class="image-preview"
+            upload-image-preview
+          )
+          
+        div(class="form-group")
+          label(for="phone") Số điện thoại
+          input(
+            type="text"
+            class="form-control"
+            id="phone"
+            name="phone"
+            value=infoUser.phone
+          )
+        div(class="form-group")
+          label(for="phone") Địa chỉ
+          input(
+            type="text"
+            class="form-control"
+            id="address"
+            name="address"
+            value=infoUser.address
+          )
+        div(class="form-group")
+          button(
+            type="submit"
+            class="btn btn-primary"
+          ) Cập nhật
+            

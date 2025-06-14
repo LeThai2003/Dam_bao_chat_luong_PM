@@ -1,0 +1,31 @@
+extends ../../layouts/default.pug
+include ../../mixins/box-head.pug
+
+block main
+  .container.my-3
+    .row
+      .col-12
+        .card.mb-4
+          .card-header Thông tin tài khoản
+          .card-body
+            if(infoUser.avatar)
+              img(
+                src=user.avatar
+                style="height: 100px;margin-bottom: 15px;"
+              )
+            if(infoUser.fullName)
+              p Họ tên: <b>#{user.fullName}</b>
+            if(infoUser.email)
+              p Email: <b>#{user.email}</b>
+            if(infoUser.phone)
+              p Số điện thoại: <b>#{user.phone}</b>
+            if(infoUser.address)
+              p Địa chỉ: <b>#{infoUser.address}</b>
+
+      .col-12 
+        a(href="/user/update-info")
+          button(
+            class="btn btn-success"
+
+          )
+            | Cập nhật thông tin

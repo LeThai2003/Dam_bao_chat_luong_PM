@@ -1,0 +1,65 @@
+extends ../../layouts/default.pug
+include ../../mixins/box-head.pug
+
+block main
+  .section-products-featured.my-5
+    .container
+      .row 
+        .col-6
+        .col-6
+          form(
+            action="/search"
+            method="GET"
+          ) 
+            div(class="form-group d-flex mb-0")
+              input(
+                type="text"
+                placeholder="Nhập từ khóa..."
+                class="form-control"
+                name="keyword"
+                value=keyword
+              )
+              button(
+                type="submit"
+                class="btn btn-primary"
+              ) Tìm
+
+      .row.mt-4
+        .col-12
+          +box-head("Sản phẩm nổi bật")
+
+
+      .row
+        each item in productsFeatured
+          .col-12.col-sm-6.col-md-4.col-lg-3.mb-3
+            .product-item
+              .inner-image
+                img(src=item.thumbnail, alt=item.title)
+              .inner-content
+                h3.inner-title
+                  a(href=`/products/detail/${item.slug}`) #{item.title}
+                .inner-price-box
+                  .inner-price-new #{Number(item.priceNew).toLocaleString('vi-VN')}đ
+                  .inner-price-old #{Number(item.price).toLocaleString("vi-VN")}đ
+                .inner-discount -#{item.discountPercentage}%
+
+
+  .section-products-featured.my-5
+    .container
+      .row
+        .col-12
+          +box-head("Sản phẩm mới")
+
+      .row
+        each item in productsNew
+          .col-12.col-sm-6.col-md-4.col-lg-3.mb-3
+            .product-item
+              .inner-image
+                img(src=item.thumbnail, alt=item.title)
+              .inner-content
+                h3.inner-title
+                  a(href=`/products/detail/${item.slug}`) #{item.title}
+                .inner-price-box
+                  .inner-price-new #{Number(item.priceNew).toLocaleString('vi-VN')}đ
+                  .inner-price-old #{Number(item.price).toLocaleString("vi-VN")}đ
+                .inner-discount -#{item.discountPercentage}%

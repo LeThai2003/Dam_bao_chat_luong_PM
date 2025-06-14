@@ -1,0 +1,28 @@
+extends ../../layouts/default.pug
+include ../../mixins/box-head.pug
+
+block main
+  .container.my-3
+    .row
+      .col-12
+        +box-head("Kết quả tìm kiếm")
+
+
+    .row
+      if(products.length > 0)
+        each item in products
+          .col-12.col-sm-6.col-md-4.col-lg-3.mb-3
+            .product-item
+              .inner-image
+                a(href=`/products/detail/${item.slug}`)
+                  img(src=item.thumbnail, alt=item.title)
+              .inner-content
+                h3.inner-title
+                  a(href=`/products/detail/${item.slug}`) #{item.title}
+                .inner-price-box
+                  .inner-price-new #{Number(item.priceNew).toLocaleString('vi-VN')}đ
+                  .inner-price-old #{Number(item.price).toLocaleString("vi-VN")}đ
+                .inner-discount -#{item.discountPercentage}%
+      else
+        div(class="col-12")
+          div(class="alert alert-danger") Không tìm thấy sản phẩm nào.
