@@ -26,7 +26,6 @@ if(tableCart) {
       if(quantity){
         window.location.href = `/cart/update/${productId}/${quantity}`;
       }
-
     });
   });
 }
@@ -165,11 +164,11 @@ if(buttonCheckout){
       const rows = tableCartBody.querySelectorAll("tr");
       const data = [];
       rows.forEach(row => {
-        console.log(row);
         const inputQuantity = row.querySelector('input[name="quantity"]');
         const productId = inputQuantity.getAttribute("item-id");
-        const quantity = inputQuantity.getAttribute("value");
+        const quantity = inputQuantity.value;
         const dataItem = productId + "-" + quantity;
+        console.log(dataItem)
         data.push(dataItem);
       });
       
