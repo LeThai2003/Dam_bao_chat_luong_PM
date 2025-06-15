@@ -5,7 +5,8 @@ module.exports = {
   },
   testEnvironment: 'node',
   // testTimeout: 30000,
-  setupFilesAfterEnv: ['<rootDir>/test/setup.js'],
-  testMatch: ['**/test/**/*.test.js'],
-  testTimeout: 30000
+  setupFilesAfterEnv: ['./test/jest/setup.js'],
+  testMatch: ['**/test/jest/**/*.test.js'],
+  testTimeout: 30000,
+  verbose: true
 };

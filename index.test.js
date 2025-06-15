@@ -65,8 +65,4 @@ app.get("*", (req, res) => {
   // res.redirect("/");
 });
 
-server.listen(port, () => {
-  console.log(`App listening on port ${port}`);
-});
-
 module.exports = app; 
