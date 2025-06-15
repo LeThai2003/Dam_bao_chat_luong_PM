@@ -1,4 +1,6 @@
 module.exports.checkOrder = (req, res, next) => {
+  console.log("-------3-----------")
+
   if (!req.body.fullName.trim()) {
     req.flash("error", `Họ tên không được để trống!`);
     res.redirect("back");

@@ -2,7 +2,7 @@ const Cart = require("../../models/cart.model");
 const Product = require("../../models/product.model");
 const Order = require("../../models/order.model");
 
-// [GET] /checkout/
+// [POST] /checkout/
 module.exports.index = async (req, res) => {
 
   // console.log(req.note);
@@ -47,6 +47,8 @@ module.exports.index = async (req, res) => {
 
 // [POST] /checkout/order
 module.exports.order = async (req, res) => {
+  console.log("-----------4-------------");
+  
   const cartId = req.cookies.cartId;
   const infoUser = req.body;
 
@@ -83,6 +85,8 @@ module.exports.order = async (req, res) => {
   }, {
     products: []
   });
+
+  console.log("----------------------5-----------")
 
   res.redirect(`/checkout/success/${order.id}`);
 }

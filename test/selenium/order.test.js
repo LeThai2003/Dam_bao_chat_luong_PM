@@ -331,23 +331,210 @@ describe("Choose Product And Payment", () => {
         //tim quantity input
         await global.driver.wait(until.elementLocated(By.xpath("//input[@name='quantity']")), 5000);
         let quantityInput = await global.driver.findElement(By.xpath("//input[@name='quantity']"));
-        await sleep(5000);
+        await sleep(2000);
         await quantityInput.clear();
 
-        // await global.driver.wait(until.elementLocated(By.xpath("//input[@name='quantity']")), 5000);
-        // quantityInput = await global.driver.findElement(By.xpath("//input[@name='quantity']"));
-        // await quantityInput.sendKeys(1);
-        // // thanh toa
-        // await global.driver.wait(until.elementLocated(By.xpath("//a[normalize-space()='THANH TOÁN']")), 5000);
-        // const paymentButton = await global.driver.findElement(By.xpath("//a[normalize-space()='THANH TOÁN']"));
+        await global.driver.wait(until.elementLocated(By.xpath("//input[@name='quantity']")), 5000);
+        quantityInput = await global.driver.findElement(By.xpath("//input[@name='quantity']"));
+        await quantityInput.sendKeys(1);
+        // thanh toa
+        await global.driver.wait(until.elementLocated(By.xpath("//a[normalize-space()='THANH TOÁN']")), 5000);
+        const paymentButton = await global.driver.findElement(By.xpath("//a[normalize-space()='THANH TOÁN']"));
 
-        // //click button
-        // await paymentButton.click();
+        //click button
+        await paymentButton.click();
 
-        // await global.driver.wait(until.elementLocated(By.css(".col-12.form-checkout")), 5000);
-        // const formInfo = await global.driver.findElements(By.css(".col-12.form-checkout"));
+        await global.driver.wait(until.elementLocated(By.css(".col-12.form-checkout")), 5000);
+        const formInfo = await global.driver.findElements(By.css(".col-12.form-checkout"));
 
-        // expect(formInfo.length).toBeGreaterThan(0);
+        expect(formInfo.length).toBeGreaterThan(0);
     })
 
 })
+
+describe("Checkout form test", () => {
+    test("should empty name", async () => {
+        await validateForm("","","");
+
+        await global.driver.wait(until.elementLocated(By.xpath("//button[contains(text(),'ĐẶT HÀNG')]")), 5000);
+        const bookButton = await global.driver.findElements(By.xpath("//button[contains(text(),'ĐẶT HÀNG')]"));
+
+        expect(bookButton.length).toBeGreaterThan(0);
+        await bookButton[0].click();
+
+
+        await global.driver.wait(until.elementLocated(By.css(".alert.alert-danger:not(.alert-hidden)")), 5000);
+        const toast = await global.driver.findElements(By.css(".alert.alert-danger:not(.alert-hidden)"));
+
+        expect(toast.length).toBeGreaterThan(0);
+
+        const toastExpect = "Họ tên không được để trống! x"
+
+        expect(await toast[0].getText()).toEqual(toastExpect);
+    })
+    test("should empty name ( have sdt)", async () => {
+        await validateForm("","0779127667","");
+
+        await global.driver.wait(until.elementLocated(By.xpath("//button[contains(text(),'ĐẶT HÀNG')]")), 5000);
+        const bookButton = await global.driver.findElements(By.xpath("//button[contains(text(),'ĐẶT HÀNG')]"));
+
+        expect(bookButton.length).toBeGreaterThan(0);
+        await bookButton[0].click();
+
+
+        await global.driver.wait(until.elementLocated(By.css(".alert.alert-danger:not(.alert-hidden)")), 5000);
+        const toast = await global.driver.findElements(By.css(".alert.alert-danger:not(.alert-hidden)"));
+
+        expect(toast.length).toBeGreaterThan(0);
+
+        const toastExpect = "Họ tên không được để trống! x"
+
+        expect(await toast[0].getText()).toEqual(toastExpect);
+    })
+    test("should empty name ( have address)", async () => {
+        await validateForm("","","hoai@gmail.com");
+
+        await global.driver.wait(until.elementLocated(By.xpath("//button[contains(text(),'ĐẶT HÀNG')]")), 5000);
+        const bookButton = await global.driver.findElements(By.xpath("//button[contains(text(),'ĐẶT HÀNG')]"));
+
+        expect(bookButton.length).toBeGreaterThan(0);
+        await bookButton[0].click();
+
+
+        await global.driver.wait(until.elementLocated(By.css(".alert.alert-danger:not(.alert-hidden)")), 5000);
+        const toast = await global.driver.findElements(By.css(".alert.alert-danger:not(.alert-hidden)"));
+
+        expect(toast.length).toBeGreaterThan(0);
+
+        const toastExpect = "Họ tên không được để trống! x"
+
+        expect(await toast[0].getText()).toEqual(toastExpect);
+    })
+    test("should no format name ( have address)", async () => {
+        await validateForm("123","","");
+
+        await global.driver.wait(until.elementLocated(By.xpath("//button[contains(text(),'ĐẶT HÀNG')]")), 5000);
+        const bookButton = await global.driver.findElements(By.xpath("//button[contains(text(),'ĐẶT HÀNG')]"));
+
+        expect(bookButton.length).toBeGreaterThan(0);
+        await bookButton[0].click();
+
+
+        await global.driver.wait(until.elementLocated(By.css(".alert.alert-danger:not(.alert-hidden)")), 5000);
+        const toast = await global.driver.findElements(By.css(".alert.alert-danger:not(.alert-hidden)"));
+
+        expect(toast.length).toBeGreaterThan(0);
+
+        const toastExpect = "Họ tên không hợp lệ! x"
+
+        expect(await toast[0].getText()).toEqual(toastExpect);
+    })
+    test("should empty sdt ( have name)", async () => {
+        await validateForm("Dao Phan Quoc Hoai","","");
+
+        await global.driver.wait(until.elementLocated(By.xpath("//button[contains(text(),'ĐẶT HÀNG')]")), 5000);
+        const bookButton = await global.driver.findElements(By.xpath("//button[contains(text(),'ĐẶT HÀNG')]"));
+
+        expect(bookButton.length).toBeGreaterThan(0);
+        await bookButton[0].click();
+
+
+        await global.driver.wait(until.elementLocated(By.css(".alert.alert-danger:not(.alert-hidden)")), 5000);
+        const toast = await global.driver.findElements(By.css(".alert.alert-danger:not(.alert-hidden)"));
+
+        expect(toast.length).toBeGreaterThan(0);
+
+        const toastExpect = "Số điện thoại không được để trống! x"
+
+        expect(await toast[0].getText()).toEqual(toastExpect);
+    })
+    test("should empty sdt ( have name and address)", async () => {
+        await validateForm("Dao Phan Quoc Hoai","","address");
+
+        await global.driver.wait(until.elementLocated(By.xpath("//button[contains(text(),'ĐẶT HÀNG')]")), 5000);
+        const bookButton = await global.driver.findElements(By.xpath("//button[contains(text(),'ĐẶT HÀNG')]"));
+
+        expect(bookButton.length).toBeGreaterThan(0);
+        await bookButton[0].click();
+
+
+        await global.driver.wait(until.elementLocated(By.css(".alert.alert-danger:not(.alert-hidden)")), 5000);
+        const toast = await global.driver.findElements(By.css(".alert.alert-danger:not(.alert-hidden)"));
+
+        expect(toast.length).toBeGreaterThan(0);
+
+        const toastExpect = "Số điện thoại không được để trống! x"
+
+        expect(await toast[0].getText()).toEqual(toastExpect);
+    })
+    test("should empty address ( have name and sdt)", async () => {
+        await validateForm("Dao Phan Quoc Hoai","0779127667","");
+
+        await global.driver.wait(until.elementLocated(By.xpath("//button[contains(text(),'ĐẶT HÀNG')]")), 5000);
+        const bookButton = await global.driver.findElements(By.xpath("//button[contains(text(),'ĐẶT HÀNG')]"));
+
+        expect(bookButton.length).toBeGreaterThan(0);
+        await bookButton[0].click();
+
+
+        await global.driver.wait(until.elementLocated(By.css(".alert.alert-danger:not(.alert-hidden)")), 5000);
+        const toast = await global.driver.findElements(By.css(".alert.alert-danger:not(.alert-hidden)"));
+
+        expect(toast.length).toBeGreaterThan(0);
+
+        const toastExpect = "Địa chỉ không được để trống! x"
+
+        expect(await toast[0].getText()).toEqual(toastExpect);
+    })
+    test("should accept order", async () => {
+        await validateForm("Dao Phan Quoc Hoai","0779127667","address");
+
+        await global.driver.wait(until.elementLocated(By.xpath("//button[contains(text(),'ĐẶT HÀNG')]")), 5000);
+        const bookButton = await global.driver.findElements(By.xpath("//button[contains(text(),'ĐẶT HÀNG')]"));
+
+        expect(bookButton.length).toBeGreaterThan(0);
+        await bookButton[0].click();
+        
+        await sleep(2000);
+
+        await global.driver.wait(until.elementLocated(By.css(".alert.alert-success:not(.alert-hidden)")), 5000);
+        const toast = await global.driver.findElements(By.css(".alert.alert-success:not(.alert-hidden)"));
+
+        expect(toast.length).toBeGreaterThan(0);
+
+        const toastExpect = "Chúc mừng bạn đã đặt hàng thành công! Chúng tôi sẽ xử lý đơn hàng trong thời gian sớm nhất."
+
+        expect(await toast[0].getText()).toEqual(toastExpect);
+    })
+})
+
+const validateForm = async (userNameText , sdtText, addressText) => {
+    await sleep(1000);
+    await global.driver.wait(until.elementLocated(By.xpath("//input[@id='fullName']")), 5000);
+    const userName = await global.driver.findElements(By.xpath("//input[@id='fullName']"));
+
+    expect(userName.length).toBeGreaterThan(0);
+
+    userName[0].clear();
+    await sleep(200);
+    userName[0].sendKeys(userNameText);
+    
+    await global.driver.wait(until.elementLocated(By.xpath("//input[@id='phone']")), 5000);
+    const sdt = await global.driver.findElements(By.xpath("//input[@id='phone']"));
+
+    expect(sdt.length).toBeGreaterThan(0);
+
+    sdt[0].clear();
+    await sleep(200);
+    sdt[0].sendKeys(sdtText);
+
+    await global.driver.wait(until.elementLocated(By.xpath("//input[@id='address']")), 5000);
+    const address = await global.driver.findElements(By.xpath("//input[@id='address']"));
+
+    expect(address.length).toBeGreaterThan(0);
+
+    address[0].clear();
+    await sleep(200);
+    address[0].sendKeys(addressText);
+    
+}
