@@ -20,8 +20,8 @@ block main
                 h3.inner-title
                   a(href=`/products/detail/${item.slug}`) #{item.title}
                 .inner-price-box
-                  .inner-price-new #{Number(item.priceNew).toLocaleString('vi-VN')}đ
-                  .inner-price-old #{Number(item.price).toLocaleString("vi-VN")}đ
+                  .inner-price-new #{Number(item.price * (1 - (Number(item.discount) || 0) / 100)).toLocaleString()}đ
+                  .inner-price-old #{Number(item.price).toLocaleString()}đ
                 .inner-discount -#{item.discountPercentage}%
       else
         div(class="col-12")

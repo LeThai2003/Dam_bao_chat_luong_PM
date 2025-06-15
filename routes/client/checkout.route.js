@@ -3,10 +3,11 @@ const router = express.Router();
 
 const controller = require("../../controllers/client/checkout.controller");
 const checkoutMiddleware = require("../../middlewares/client/checkout.middleware");
+const checkoutValidate = require("../../validates/client/checkout.validate");
 
 router.get("/", checkoutMiddleware.checkout, controller.index);
 
-router.post("/order", checkoutMiddleware.checkout, checkoutMiddleware.order, controller.order);
+router.post("/order", checkoutMiddleware.checkout, checkoutMiddleware.order, checkoutValidate.checkOrder, controller.order);
 
 router.get("/success/:orderId", controller.success);
 

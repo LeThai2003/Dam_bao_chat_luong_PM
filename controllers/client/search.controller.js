@@ -1,3 +1,4 @@
+const { convertToSlug } = require("../../helpers/convertToSlug");
 const Product = require("../../models/product.model");
 
 // [GET] /search/
@@ -7,10 +8,10 @@ module.exports.index = async (req, res) => {
   let products = [];
 
   if(keyword) {
-    const keywordRegex = new RegExp(keyword, "i");
+    const keywordSlug = convertToSlug(keyword);
 
     products = await Product.find({
-      title: keywordRegex,
+      slug: {$regex: keywordSlug},
       status: "active",
       deleted: false
     }).sort({ position: "desc" });

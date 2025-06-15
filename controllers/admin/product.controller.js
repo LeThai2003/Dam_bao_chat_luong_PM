@@ -6,6 +6,7 @@ const paginationHelper = require("../../helpers/pagination.helper");
 const createTreeHelper = require("../../helpers/create-tree.helper");
 
 const systemConfig = require("../../config/system");
+const { convertToSlug } = require("../../helpers/convertToSlug");
 
 // [GET] /admin/products/
 module.exports.index = async (req, res) => {
@@ -24,14 +25,18 @@ module.exports.index = async (req, res) => {
 
     // Search
     if(req.query.keyword) {
-      const regex = new RegExp(req.query.keyword, "i");
-      find.title = regex;
+      const keywordSlug = convertToSlug(req.query.keyword);
+      find.slug = {$regex: keywordSlug};
     }
+    // if(req.query.keyword) {
+    //   const regex = new RegExp(req.query.keyword, "i");
+    //   find.title = regex;
+    // }
     // End Search
 
     // Pagination
     const countProducts = await Product.countDocuments(find);
-    const objectPagination = paginationHelper(4, req.query, countProducts);
+    const objectPagination = paginationHelper(3, req.query, countProducts);
     // End Pagination
 
     // Sort
