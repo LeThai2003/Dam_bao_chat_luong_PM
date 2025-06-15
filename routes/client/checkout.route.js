@@ -4,7 +4,7 @@ const router = express.Router();
 const controller = require("../../controllers/client/checkout.controller");
 const checkoutMiddleware = require("../../middlewares/client/checkout.middleware");
 
-router.get("/", checkoutMiddleware.checkout, controller.index);
+router.post("/", checkoutMiddleware.checkout, controller.index);
 
 router.post("/order", checkoutMiddleware.checkout, checkoutMiddleware.order, controller.order);
 

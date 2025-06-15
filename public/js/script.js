@@ -23,7 +23,10 @@ if(tableCart) {
       const productId = input.getAttribute("item-id");
       const quantity = input.value;
 
-      window.location.href = `/cart/update/${productId}/${quantity}`;
+      if(quantity){
+        window.location.href = `/cart/update/${productId}/${quantity}`;
+      }
+
     });
   });
 }
@@ -150,3 +153,31 @@ if(buttonCancleOrder)
   }
 }
 // End button cancle order
+
+// form checkout cart
+const buttonCheckout = document.querySelector("a[button-checkout]");
+if(buttonCheckout){
+  console.log(buttonCheckout);
+  buttonCheckout.addEventListener("click", () => {
+    const formCheckoutCart = document.querySelector("form[form-checkout-cart]");
+    const tableCartBody = document.querySelector("table[table-cart] tbody");
+    if(formCheckoutCart && tableCart){
+      const rows = tableCartBody.querySelectorAll("tr");
+      const data = [];
+      rows.forEach(row => {
+        console.log(row);
+        const inputQuantity = row.querySelector('input[name="quantity"]');
+        const productId = inputQuantity.getAttribute("item-id");
+        const quantity = inputQuantity.getAttribute("value");
+        const dataItem = productId + "-" + quantity;
+        data.push(dataItem);
+      });
+      
+      const inputData = formCheckoutCart.querySelector('input[name="data"]');
+      inputData.value = data;
+
+      formCheckoutCart.submit();      
+    }
+  })
+}
+// end form checkout cart

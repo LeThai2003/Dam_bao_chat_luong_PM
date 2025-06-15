@@ -4,26 +4,18 @@ const Product = require("../../models/product.model");
 
 module.exports.checkout = async (req, res, next) => {
 
-  const cartId = req.cookies.cartId;
+  const data = req.body.data.split(",");   // [ '684a928167d31f14d1a42984-1', '684a9eb00a6f9165993e16bf-4' ]
   
-  const cart = await Cart.findOne({
-    _id: cartId
-  });
-
   req.note = []; 
 
-  // note = [
-  //   {
-  //     productId: "123",
-  //     title: "ABC",
-  //     content: "Số lượng tồn của sản phẩm ABC chỉ còn 2. Vui lòng chọn lại!"
-  //   }
-  // ]
+  if(data.length > 0) {
+    for (const item of data) {
 
-  if(cart.products.length > 0) {
-    for (const item of cart.products) {
+      const productId = item.split("-")[0];
+      const quantity = item.split("-")[1];
+
       const product = await Product.findOne({
-        _id: item.product_id
+        _id: productId
       }).select("title stock");
 
       // Trường hợp 2 - số lượng tồn của món hàng(product_id) nhỏ hơn số lượng người dùng mua thì lúc này sẽ xuất ra thông báo để người dùng biết và thay đổi
@@ -33,11 +25,11 @@ module.exports.checkout = async (req, res, next) => {
 
       if(product.stock == 0){
         req.note.push({
-          productId: product._id,
+          productId: productId,
           content: `Sản phẩm <strong>"${product.title}"</strong> đã hết hàng!`,
           type: "out-of-stock"
         })
-      } else if (product.stock < item.quantity) {
+      } else if (product.stock < quantity) {
         req.note.push({
           productId: product._id,
           content: `Sản phẩm <strong>"${product.title}"</strong> chỉ còn <strong>${product.stock}</strong> sản phẩm. Vui lòng điều chỉnh số lượng!`,
@@ -59,22 +51,21 @@ module.exports.order = async (req, res, next) => {
     return res.redirect(`/cart`);
   }
 
-  const cartId = req.cookies.cartId;
-  
-  const cart = await Cart.findOne({
-    _id: cartId
-  });
+  const data = req.body.data.split(",");
 
+  if(data.length > 0) {
+    for (const item of data) {
 
-  if(cart.products.length > 0) {
-    for (const item of cart.products) {
+      const productId = item.split("-")[0];
+      const quantity = item.split("-")[1];
+
       const product = await Product.findOne({
-        _id: item.product_id
+        _id: productId
       }).select("title stock");
 
       // Trường hợp 1 - số lượng tồn của món hàng(product_id) lớn hơn số lượng người dùng mua thì tiến hành trừ đi số lượng tương ứng. Ví dụ: số lượng tồn là 10, người dùng mua 2 thì số lượng tồn còn lại là 8.
 
-      const newStock = product.stock - item.quantity;
+      const newStock = product.stock - quantity;
       await Product.updateOne({
         _id: product._id
       }, {
