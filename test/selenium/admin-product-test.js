@@ -451,15 +451,15 @@ async function runAllTests() {
     await login();
     await goToProductPage();
 
-    // await testPagination();
-    // await searchProduct();
-    // await sortPriceAsc();
-    // await changeStatus();
-    // await testInvalidProductSubmission();
-    // await testAddProductSuccess();
-    // await editProductSuccess();
-    // await deleteProduct();
-    // await changePositonProduct();
+    await testPagination();
+    await searchProduct();
+    await sortPriceAsc();
+    await changeStatus();
+    await testInvalidProductSubmission();
+    await testAddProductSuccess();
+    await editProductSuccess();
+    await deleteProduct();
+    await changePositonProduct();
     await testFilterStatus();
 
 
