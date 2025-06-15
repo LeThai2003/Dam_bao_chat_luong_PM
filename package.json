@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --inspect index.js",
-    "test": "jest --detectOpenHandles --testPathPatterns=test/selenium"
+    "test": "jest --detectOpenHandles --testPathPatterns=test/selenium",
+    "test jest": "npx jest --detectOpenHandles --testPathPatterns=test/jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "author": "",
   "license": "ISC",
@@ -17,7 +20,6 @@
     "express": "^4.19.2",
     "express-flash": "^0.0.2",
     "express-session": "^1.18.0",
-    "jest": "^30.0.0",
     "md5": "^2.3.0",
     "method-override": "^3.0.0",
     "moment": "^2.30.1",
@@ -35,6 +37,8 @@
   },
   "devDependencies": {
     "chromedriver": "^137.0.3",
-    "nodemon": "^3.1.0"
+    "jest": "^30.0.0",
+    "nodemon": "^3.1.0",
+    "supertest": "^7.1.1"
   }
 }
