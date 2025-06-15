@@ -37,11 +37,11 @@ module.exports.index = async (req, res) => {
         : "Đã hủy"
       );
 
-      console.log(order.statusVi);
+      // console.log(order.statusVi);
     }
   }
 
-  console.log(ordersHistory);
+  // console.log(ordersHistory);
   // Đơn hàng mới
   const ordersRecent = await Order.find({
     cart_id: cartId, 
@@ -73,7 +73,7 @@ module.exports.index = async (req, res) => {
       : order.status == "Processing" ? "Đang đóng gói"
       : "Đang giao");
 
-      console.log(order.statusVi);
+      // console.log(order.statusVi);
     }
   }
   
@@ -143,6 +143,15 @@ module.exports.updateStatus = async (req, res) => {
   if(['Created', 'Confirmed', 'Processing'].includes(order.status))
   {
     await Order.updateOne({_id: orderId}, {status: "Cancelled-Client"});
+
+    // cập nhật lại số lượng hàng
+    for (const product of order.products) {
+      await Product.updateOne({
+        _id: product.product_id
+      }, {
+        $inc: {stock: product.quantity}
+      });
+    }
   }
   else
   {
