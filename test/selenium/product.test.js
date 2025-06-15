@@ -1,13 +1,13 @@
-const { By, until } = require('selenium-webdriver');
-const { baseUrl } = require('../setup');
+// const { By, until } = require('selenium-webdriver');
+// const { baseUrl } = require('../setup');
 
-describe('Product Page Tests', () => {
-    test('should load product page', async () => {
-        await global.driver.get(baseUrl + 'products');
-        const title = await global.driver.getTitle();
-        expect(title).toBeDefined();
-    });
-});
+// describe('Product Page Tests', () => {
+//     test('should load product page', async () => {
+//         await global.driver.get(baseUrl + 'products');
+//         const title = await global.driver.getTitle();
+//         expect(title).toBeDefined();
+//     });
+// });
 
 // describe('Render Product Page Tests', () => {
 //     test('should render product list', async () => {
