@@ -75,3 +75,15 @@ block main
           
           div(class="text-right mt-3")
             a(href="/checkout" class="btn btn-success") THANH TOÁN
+
+  form(
+    form-checkout-cart
+    action="/checkout"
+    method="GET"
+  )
+    input(
+      type="text"
+      name="data"
+      value=""
+      class="form-control d-none"
+    )
