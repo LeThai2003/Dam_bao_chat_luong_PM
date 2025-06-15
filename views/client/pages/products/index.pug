@@ -48,7 +48,7 @@ block main
                   a(href=`/products/detail/${item.slug}`)
                     img(src=item.thumbnail, alt=item.title)
                 .inner-content
-                  h3.inner-title
+                  h3.inner-title.product-title
                     a(href=`/products/detail/${item.slug}`) #{item.title}
                   .inner-price-box
                     .inner-price-new #{Number(item.priceNew).toLocaleString('vi-VN')}đ
