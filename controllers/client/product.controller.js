@@ -1,6 +1,7 @@
 const Product = require("../../models/product.model");
 const ProductCategory = require("../../models/product-category.model");
 const paginationHelper = require("../../helpers/pagination.helper");
+const { convertToSlug } = require("../../helpers/convertToSlug");
 
 // [GET] /products/
 module.exports.index = async (req, res) => {
@@ -17,8 +18,8 @@ module.exports.index = async (req, res) => {
 
   // Search
   if(req.query.keyword) {
-    const regex = new RegExp(req.query.keyword, "i");
-    find.title = regex;
+    const keywordSlug = convertToSlug(req.query.keyword);
+    find.slug = {$regex: keywordSlug};
   }
   // End Search
   
@@ -96,8 +97,8 @@ module.exports.category = async (req, res) => {
 
   // Search
   if(req.query.keyword) {
-    const regex = new RegExp(req.query.keyword, "i");
-    find.title = regex;
+    const keywordSlug = convertToSlug(req.query.keyword);
+    find.slug = {$regex: keywordSlug};
   }
   // End Search
   
