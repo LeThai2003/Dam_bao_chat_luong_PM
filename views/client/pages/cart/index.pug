@@ -70,10 +70,11 @@ block main
               tr
                 td(colspan="7") Chưa có sản phẩm nào!
         
-        h3(class="text-right") Tổng đơn hàng: #{Number(cartDetail.totalPrice).toLocaleString()}đ
-        
-        div(class="text-right mt-3")
-          a(href="javascript:;" button-checkout class="btn btn-success") THANH TOÁN
+        if(cartDetail.products.length > 0)
+          h3(class="text-right") Tổng đơn hàng: #{Number(cartDetail.totalPrice).toLocaleString()}đ
+          
+          div(class="text-right mt-3")
+            a(href="/checkout" class="btn btn-success") THANH TOÁN
 
   form(
     form-checkout-cart

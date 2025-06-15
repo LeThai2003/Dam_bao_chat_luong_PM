@@ -101,7 +101,7 @@ block main
                     height="auto"
                   )
                 td #{item.title}
-                td #{item.price}$
+                td #{Number(item.price).toLocaleString()}đ
                 td
                   input(
                     type="number"
