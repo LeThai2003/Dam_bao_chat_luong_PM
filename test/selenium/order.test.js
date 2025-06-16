@@ -79,6 +79,8 @@ describe("Chosse Product Not Payment", () => {
         }else{
             await itemOrder[0].click();
         }
+
+        
     })
     test("should select product quantity greater than stock quantity", async () => {
         //tim so luong item con lai
@@ -286,7 +288,7 @@ describe("Choose Product And Payment", () => {
         }
     })
 
-    test("should add item in order ( not login)", async () => {
+    test("should add item in order", async () => {
         await sleep(1000);
         // tim input stock 
         await global.driver.wait(until.elementLocated(By.xpath("//input[@name='quantity']")), 5000);
