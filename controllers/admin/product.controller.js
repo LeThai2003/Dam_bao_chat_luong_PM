@@ -168,6 +168,7 @@ module.exports.deleteItem = async (req, res) => {
     req.flash('success', 'Xóa sản phẩm thành công!');
   } catch (error) {
     console.log(error);
+    req.flash('error', 'Xóa sản phẩm thất bại!');
   }
 
   res.redirect("back");
@@ -175,42 +176,54 @@ module.exports.deleteItem = async (req, res) => {
 
 // [GET] /admin/products/create
 module.exports.create = async (req, res) => {
-  const records = await ProductCategory.find({
-    deleted: false,
-  });
+  try {
+    const records = await ProductCategory.find({
+      deleted: false,
+    });
 
-  const newRecords = createTreeHelper(records);
+    const newRecords = createTreeHelper(records);
 
-  res.render("admin/pages/products/create", {
-    pageTitle: "Thêm mới sản phẩm",
-    records: newRecords
-  });
+    res.render("admin/pages/products/create", {
+      pageTitle: "Thêm mới sản phẩm",
+      records: newRecords
+    });
+  } catch (error) {
+    req.flash("error", "Có lỗi xảy ra");
+    console.log(error);
+    res.redirect(`back`);
+  }
 };
 
 // [POST] /admin/products/create
 module.exports.createPost = async (req, res) => {
-  req.body.price = parseInt(req.body.price);
-  req.body.discountPercentage = parseInt(req.body.discountPercentage);
-  req.body.stock = parseInt(req.body.stock);
+  try {
+    req.body.price = parseInt(req.body.price);
+    req.body.discountPercentage = parseInt(req.body.discountPercentage);
+    req.body.stock = parseInt(req.body.stock);
 
-  if(req.body.position == "") {
-    const countProducts = await Product.countDocuments();
-    req.body.position = countProducts + 1;
-  } else {
-    req.body.position = parseInt(req.body.position);
+    if(req.body.position == "") {
+      const countProducts = await Product.countDocuments();
+      req.body.position = countProducts + 1;
+    } else {
+      req.body.position = parseInt(req.body.position);
+    }
+
+    req.body.createdBy = {
+      accountId: res.locals.user.id,
+      createdAt: new Date()
+    };
+
+    const product = new Product(req.body);
+    await product.save();
+
+    req.flash("success", "Thêm mới sản phẩm thành công!");
+
+    res.redirect(`/${systemConfig.prefixAdmin}/products`);
+  } catch (error) {
+    req.flash("error", "Thêm mới sản phẩm không thành công!");
+    console.log(error);
+    res.redirect(`back`);
   }
-
-  req.body.createdBy = {
-    accountId: res.locals.user.id,
-    createdAt: new Date()
-  };
-
-  const product = new Product(req.body);
-  await product.save();
-
-  req.flash("success", "Thêm mới sản phẩm thành công!");
-
-  res.redirect(`/${systemConfig.prefixAdmin}/products`);
 };
 
 // [GET] /admin/products/edit/:id

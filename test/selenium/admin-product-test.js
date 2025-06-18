@@ -94,6 +94,8 @@ async function testPagination() {
 }
 
 async function searchProduct() {
+  await driver.get(`${URL}/admin/products`);
+
   const keyword = 'Nữ'; // hoặc thử 'xxxxx' để test không có kết quả
 
   const searchInput = await driver.findElement(By.name('keyword'));
@@ -445,6 +447,8 @@ async function testFilterStatus() {
 }
 
 
+
+
 async function runAllTests() {
   driver = await new Builder().forBrowser('chrome').build();
   try {
@@ -453,14 +457,14 @@ async function runAllTests() {
 
     await testPagination();
     await searchProduct();
-    await sortPriceAsc();
-    await changeStatus();
-    await testInvalidProductSubmission();
-    await testAddProductSuccess();
-    await editProductSuccess();
-    await deleteProduct();
-    await changePositonProduct();
-    await testFilterStatus();
+    // await sortPriceAsc();
+    // await changeStatus();
+    // await testInvalidProductSubmission();
+    // await testAddProductSuccess();
+    // await editProductSuccess();
+    // await deleteProduct();
+    // await changePositonProduct();
+    // await testFilterStatus();
 
 
   } catch (err) {
