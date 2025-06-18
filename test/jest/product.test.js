@@ -35,8 +35,8 @@ describe('Product Controller Tests', () => {
 
   afterAll(async () => {
     // Clean up test data
-    await Product.deleteMany({});
-    await ProductCategory.deleteMany({});
+    await Product.deleteMany({title: "Test Product"});
+    await ProductCategory.deleteMany({title: 'Test Category'});
     // Close database connection
     await mongoose.connection.close();
   });
