@@ -1,0 +1,153 @@
+[2025-06-19T05:19:14.099Z] [INFO] Test bắt đầu
+[2025-06-19T05:19:14.105Z] [ERROR] Có lỗi xảy ra
+[2025-06-19T05:22:03.720Z] [INFO] Test bắt đầu
+[2025-06-19T05:22:03.726Z] [ERROR] Có lỗi xảy ra
+[2025-06-19T05:22:07.750Z] [INFO] === BẮT ĐẦU TEST: Truy cập trang quản lý sản phẩm ===
+[2025-06-19T05:22:09.620Z] [INFO] ✅ [PASS] Truy cập trang quản lý sản phẩm
+[2025-06-19T05:22:09.621Z] [INFO] === BẮT ĐẦU TEST: Phân trang hoạt động đúng ===
+[2025-06-19T05:22:11.928Z] [INFO] ✅ [PASS] Phân trang hoạt động đúng
+[2025-06-19T05:22:11.928Z] [INFO] === BẮT ĐẦU TEST: Tìm kiếm sản phẩm - Có kết quả ===
+[2025-06-19T05:22:14.465Z] [ERROR] ❌ [FAIL] Tìm kiếm sản phẩm - Có kết quả
+   → Lỗi: Không tìm thấy sản phẩm nào cho từ khoá "Áo khoác chống nắng nữ"
+[2025-06-19T05:22:14.466Z] [INFO] === BẮT ĐẦU TEST: Tìm kiếm sản phẩm - Không có kết quả ===
+[2025-06-19T05:22:17.081Z] [INFO] ✅ [PASS] Tìm kiếm sản phẩm - Không có kết quả
+[2025-06-19T05:22:17.082Z] [INFO] === BẮT ĐẦU TEST: Sắp xếp sản phẩm theo giá tăng dần ===
+[2025-06-19T05:22:19.017Z] [INFO] ✅ [PASS] Sắp xếp sản phẩm theo giá tăng dần
+[2025-06-19T05:22:19.018Z] [INFO] === BẮT ĐẦU TEST: Thay đổi trạng thái sản phẩm ===
+[2025-06-19T05:22:21.978Z] [INFO] ✅ [PASS] Thay đổi trạng thái sản phẩm
+[2025-06-19T05:22:21.979Z] [INFO] === BẮT ĐẦU TEST: Validate: Title trống ===
+[2025-06-19T05:22:24.176Z] [INFO] ✅ [PASS] Validate: Title trống
+[2025-06-19T05:22:24.176Z] [INFO] === BẮT ĐẦU TEST: Validate: Title < 5 ký tự ===
+[2025-06-19T05:22:26.153Z] [INFO] ✅ [PASS] Validate: Title < 5 ký tự
+[2025-06-19T05:22:26.155Z] [INFO] === BẮT ĐẦU TEST: Validate: Giá không hợp lệ ===
+[2025-06-19T05:22:28.674Z] [INFO] ✅ [PASS] Validate: Giá không hợp lệ
+[2025-06-19T05:22:28.675Z] [INFO] === BẮT ĐẦU TEST: Validate: Stock âm ===
+[2025-06-19T05:22:30.525Z] [INFO] ✅ [PASS] Validate: Stock âm
+[2025-06-19T05:22:30.526Z] [INFO] === BẮT ĐẦU TEST: Validate: Discount không hợp lệ ===
+[2025-06-19T05:22:37.783Z] [INFO] ✅ [PASS] Validate: Discount không hợp lệ
+[2025-06-19T05:22:37.784Z] [INFO] === BẮT ĐẦU TEST: Test thêm sản phẩm thành công ===
+[2025-06-19T05:22:42.803Z] [INFO] ✅ [PASS] Test thêm sản phẩm thành công
+[2025-06-19T05:22:42.804Z] [INFO] === BẮT ĐẦU TEST: Test chỉnh sửa sản phẩm thành công ===
+[2025-06-19T05:22:45.909Z] [INFO] ✅ [PASS] Test chỉnh sửa sản phẩm thành công
+[2025-06-19T05:22:45.910Z] [INFO] === BẮT ĐẦU TEST: Test xóa sản phẩm thành công ===
+[2025-06-19T05:22:49.894Z] [INFO] ✅ [PASS] Test xóa sản phẩm thành công
+[2025-06-19T05:22:49.894Z] [INFO] === BẮT ĐẦU TEST: Test hủy xóa sản phẩm ===
+[2025-06-19T05:22:51.598Z] [INFO] ✅ [PASS] Test hủy xóa sản phẩm
+[2025-06-19T05:22:51.599Z] [INFO] === BẮT ĐẦU TEST: Test thay đổi vị trí sản phẩm bằng click checkbox ===
+[2025-06-19T05:22:57.763Z] [INFO] ✅ [PASS] Test thay đổi vị trí sản phẩm bằng click checkbox
+[2025-06-19T05:22:57.764Z] [INFO] === BẮT ĐẦU TEST: Lọc trạng thái sản phẩm (Hoạt động & Dừng hoạt động) ===
+[2025-06-19T05:23:10.679Z] [INFO] ✅ [PASS] Lọc trạng thái sản phẩm (Hoạt động & Dừng hoạt động)
+[2025-06-19T05:33:24.151Z] [INFO] Test bắt đầu
+[2025-06-19T05:33:24.158Z] [ERROR] Có lỗi xảy ra
+[2025-06-19T05:33:28.193Z] [INFO] === BẮT ĐẦU TEST: Truy cập trang quản lý sản phẩm ===
+[2025-06-19T05:33:29.332Z] [INFO] ✅ [PASS] Truy cập trang quản lý sản phẩm
+[2025-06-19T05:33:29.333Z] [INFO] === BẮT ĐẦU TEST: Phân trang hoạt động đúng ===
+[2025-06-19T05:33:32.946Z] [INFO] ✅ [PASS] Phân trang hoạt động đúng
+[2025-06-19T05:33:32.947Z] [INFO] === BẮT ĐẦU TEST: Tìm kiếm sản phẩm - Có kết quả ===
+[2025-06-19T05:33:36.356Z] [ERROR] ❌ [FAIL] Tìm kiếm sản phẩm - Có kết quả
+   → Lỗi: Không tìm thấy sản phẩm nào cho từ khoá "Áo khoác chống nắng nữ"
+[2025-06-19T05:33:36.356Z] [INFO] === BẮT ĐẦU TEST: Tìm kiếm sản phẩm - Không có kết quả ===
+[2025-06-19T05:33:39.357Z] [INFO] ✅ [PASS] Tìm kiếm sản phẩm - Không có kết quả
+[2025-06-19T05:33:39.357Z] [INFO] === BẮT ĐẦU TEST: Sắp xếp sản phẩm theo giá tăng dần ===
+[2025-06-19T05:33:41.272Z] [INFO] ✅ [PASS] Sắp xếp sản phẩm theo giá tăng dần
+[2025-06-19T05:33:41.273Z] [INFO] === BẮT ĐẦU TEST: Thay đổi trạng thái sản phẩm ===
+[2025-06-19T05:33:45.150Z] [INFO] ✅ [PASS] Thay đổi trạng thái sản phẩm
+[2025-06-19T05:33:45.150Z] [INFO] === BẮT ĐẦU TEST: Validate: Title trống ===
+[2025-06-19T05:33:47.687Z] [INFO] ✅ [PASS] Validate: Title trống
+[2025-06-19T05:33:47.688Z] [INFO] === BẮT ĐẦU TEST: Validate: Title < 5 ký tự ===
+[2025-06-19T05:33:49.899Z] [INFO] ✅ [PASS] Validate: Title < 5 ký tự
+[2025-06-19T05:33:49.900Z] [INFO] === BẮT ĐẦU TEST: Validate: Giá không hợp lệ ===
+[2025-06-19T05:33:52.455Z] [INFO] ✅ [PASS] Validate: Giá không hợp lệ
+[2025-06-19T05:33:52.456Z] [INFO] === BẮT ĐẦU TEST: Validate: Stock âm ===
+[2025-06-19T05:33:54.718Z] [INFO] ✅ [PASS] Validate: Stock âm
+[2025-06-19T05:33:54.718Z] [INFO] === BẮT ĐẦU TEST: Validate: Discount không hợp lệ ===
+[2025-06-19T05:33:58.007Z] [INFO] ✅ [PASS] Validate: Discount không hợp lệ
+[2025-06-19T05:33:58.008Z] [INFO] === BẮT ĐẦU TEST: Test thêm sản phẩm thành công ===
+[2025-06-19T05:34:03.430Z] [INFO] ✅ [PASS] Test thêm sản phẩm thành công
+[2025-06-19T05:34:03.431Z] [INFO] === BẮT ĐẦU TEST: Test chỉnh sửa sản phẩm thành công ===
+[2025-06-19T05:34:09.730Z] [INFO] ✅ [PASS] Test chỉnh sửa sản phẩm thành công
+[2025-06-19T05:34:09.731Z] [INFO] === BẮT ĐẦU TEST: Test xóa sản phẩm thành công ===
+[2025-06-19T05:34:14.377Z] [INFO] ✅ [PASS] Test xóa sản phẩm thành công
+[2025-06-19T05:34:14.377Z] [INFO] === BẮT ĐẦU TEST: Test hủy xóa sản phẩm ===
+[2025-06-19T05:34:16.560Z] [INFO] ✅ [PASS] Test hủy xóa sản phẩm
+[2025-06-19T05:34:16.561Z] [INFO] === BẮT ĐẦU TEST: Test thay đổi vị trí sản phẩm bằng click checkbox ===
+[2025-06-19T05:34:22.173Z] [INFO] ✅ [PASS] Test thay đổi vị trí sản phẩm bằng click checkbox
+[2025-06-19T05:34:22.175Z] [INFO] === BẮT ĐẦU TEST: Lọc trạng thái sản phẩm (Hoạt động & Dừng hoạt động) ===
+[2025-06-19T05:34:49.621Z] [INFO] ✅ [PASS] Lọc trạng thái sản phẩm (Hoạt động & Dừng hoạt động)
+[2025-06-19T05:35:53.476Z] [INFO] Test bắt đầu
+[2025-06-19T05:35:53.484Z] [ERROR] Có lỗi xảy ra
+[2025-06-19T05:35:58.078Z] [INFO] === BẮT ĐẦU TEST: Truy cập trang quản lý sản phẩm ===
+[2025-06-19T05:36:04.618Z] [INFO] ✅ [PASS] Truy cập trang quản lý sản phẩm
+[2025-06-19T05:36:04.619Z] [INFO] === BẮT ĐẦU TEST: Tìm kiếm sản phẩm - Có kết quả ===
+[2025-06-19T05:36:08.467Z] [INFO] ✅ [PASS] Tìm kiếm sản phẩm - Có kết quả
+[2025-06-19T05:36:51.353Z] [INFO] Test bắt đầu
+[2025-06-19T05:36:51.361Z] [ERROR] Có lỗi xảy ra
+[2025-06-19T05:36:55.709Z] [INFO] === BẮT ĐẦU TEST: Truy cập trang quản lý sản phẩm ===
+[2025-06-19T05:36:57.388Z] [INFO] ✅ [PASS] Truy cập trang quản lý sản phẩm
+[2025-06-19T05:36:57.390Z] [INFO] === BẮT ĐẦU TEST: Phân trang hoạt động đúng ===
+[2025-06-19T05:37:00.380Z] [INFO] ✅ [PASS] Phân trang hoạt động đúng
+[2025-06-19T05:37:00.381Z] [INFO] === BẮT ĐẦU TEST: Tìm kiếm sản phẩm - Có kết quả ===
+[2025-06-19T05:37:03.198Z] [INFO] ✅ [PASS] Tìm kiếm sản phẩm - Có kết quả
+[2025-06-19T05:37:03.199Z] [INFO] === BẮT ĐẦU TEST: Tìm kiếm sản phẩm - Không có kết quả ===
+[2025-06-19T05:37:06.079Z] [INFO] ✅ [PASS] Tìm kiếm sản phẩm - Không có kết quả
+[2025-06-19T05:37:06.081Z] [INFO] === BẮT ĐẦU TEST: Sắp xếp sản phẩm theo giá tăng dần ===
+[2025-06-19T05:37:07.905Z] [INFO] ✅ [PASS] Sắp xếp sản phẩm theo giá tăng dần
+[2025-06-19T05:37:07.906Z] [INFO] === BẮT ĐẦU TEST: Thay đổi trạng thái sản phẩm ===
+[2025-06-19T05:37:10.712Z] [INFO] ✅ [PASS] Thay đổi trạng thái sản phẩm
+[2025-06-19T05:37:10.713Z] [INFO] === BẮT ĐẦU TEST: Validate: Title trống ===
+[2025-06-19T05:37:12.797Z] [INFO] ✅ [PASS] Validate: Title trống
+[2025-06-19T05:37:12.798Z] [INFO] === BẮT ĐẦU TEST: Validate: Title < 5 ký tự ===
+[2025-06-19T05:37:14.582Z] [INFO] ✅ [PASS] Validate: Title < 5 ký tự
+[2025-06-19T05:37:14.583Z] [INFO] === BẮT ĐẦU TEST: Validate: Giá không hợp lệ ===
+[2025-06-19T05:37:16.465Z] [INFO] ✅ [PASS] Validate: Giá không hợp lệ
+[2025-06-19T05:37:16.465Z] [INFO] === BẮT ĐẦU TEST: Validate: Stock âm ===
+[2025-06-19T05:37:18.258Z] [INFO] ✅ [PASS] Validate: Stock âm
+[2025-06-19T05:37:18.258Z] [INFO] === BẮT ĐẦU TEST: Validate: Discount không hợp lệ ===
+[2025-06-19T05:37:20.093Z] [INFO] ✅ [PASS] Validate: Discount không hợp lệ
+[2025-06-19T05:37:20.094Z] [INFO] === BẮT ĐẦU TEST: Test thêm sản phẩm thành công ===
+[2025-06-19T05:37:28.071Z] [INFO] ✅ [PASS] Test thêm sản phẩm thành công
+[2025-06-19T05:37:28.071Z] [INFO] === BẮT ĐẦU TEST: Test chỉnh sửa sản phẩm thành công ===
+[2025-06-19T05:37:30.958Z] [INFO] ✅ [PASS] Test chỉnh sửa sản phẩm thành công
+[2025-06-19T05:37:30.959Z] [INFO] === BẮT ĐẦU TEST: Test xóa sản phẩm thành công ===
+[2025-06-19T05:37:34.884Z] [INFO] ✅ [PASS] Test xóa sản phẩm thành công
+[2025-06-19T05:37:34.885Z] [INFO] === BẮT ĐẦU TEST: Test hủy xóa sản phẩm ===
+[2025-06-19T05:37:36.564Z] [INFO] ✅ [PASS] Test hủy xóa sản phẩm
+[2025-06-19T05:37:36.565Z] [INFO] === BẮT ĐẦU TEST: Test thay đổi vị trí sản phẩm bằng click checkbox ===
+[2025-06-19T05:37:42.684Z] [INFO] ✅ [PASS] Test thay đổi vị trí sản phẩm bằng click checkbox
+[2025-06-19T05:37:42.685Z] [INFO] === BẮT ĐẦU TEST: Lọc trạng thái sản phẩm (Hoạt động & Dừng hoạt động) ===
+[2025-06-19T05:38:00.216Z] [INFO] ✅ [PASS] Lọc trạng thái sản phẩm (Hoạt động & Dừng hoạt động)
+[2025-06-19T05:47:15.167Z] [INFO] ------------------------------Test bắt đầu-----------------------------------
+[2025-06-19T05:47:19.970Z] [INFO] === BẮT ĐẦU TEST: Truy cập trang quản lý sản phẩm ===
+[2025-06-19T05:47:21.226Z] [INFO] ✅ [PASS] Truy cập trang quản lý sản phẩm
+[2025-06-19T05:47:21.227Z] [INFO] === BẮT ĐẦU TEST: Phân trang hoạt động đúng ===
+[2025-06-19T05:47:23.694Z] [INFO] ✅ [PASS] Phân trang hoạt động đúng
+[2025-06-19T05:47:23.696Z] [INFO] === BẮT ĐẦU TEST: Tìm kiếm sản phẩm - Có kết quả ===
+[2025-06-19T05:47:26.584Z] [INFO] ✅ [PASS] Tìm kiếm sản phẩm - Có kết quả
+[2025-06-19T05:47:26.585Z] [INFO] === BẮT ĐẦU TEST: Tìm kiếm sản phẩm - Không có kết quả ===
+[2025-06-19T05:47:29.153Z] [INFO] ✅ [PASS] Tìm kiếm sản phẩm - Không có kết quả
+[2025-06-19T05:47:29.155Z] [INFO] === BẮT ĐẦU TEST: Sắp xếp sản phẩm theo giá tăng dần ===
+[2025-06-19T05:47:31.054Z] [INFO] ✅ [PASS] Sắp xếp sản phẩm theo giá tăng dần
+[2025-06-19T05:47:31.055Z] [INFO] === BẮT ĐẦU TEST: Thay đổi trạng thái sản phẩm ===
+[2025-06-19T05:47:33.959Z] [INFO] ✅ [PASS] Thay đổi trạng thái sản phẩm
+[2025-06-19T05:47:33.960Z] [INFO] === BẮT ĐẦU TEST: Validate: Title trống ===
+[2025-06-19T05:47:36.220Z] [INFO] ✅ [PASS] Validate: Title trống
+[2025-06-19T05:47:36.221Z] [INFO] === BẮT ĐẦU TEST: Validate: Title < 5 ký tự ===
+[2025-06-19T05:47:39.133Z] [INFO] ✅ [PASS] Validate: Title < 5 ký tự
+[2025-06-19T05:47:39.134Z] [INFO] === BẮT ĐẦU TEST: Validate: Giá không hợp lệ ===
+[2025-06-19T05:47:40.985Z] [INFO] ✅ [PASS] Validate: Giá không hợp lệ
+[2025-06-19T05:47:40.986Z] [INFO] === BẮT ĐẦU TEST: Validate: Stock âm ===
+[2025-06-19T05:47:43.388Z] [INFO] ✅ [PASS] Validate: Stock âm
+[2025-06-19T05:47:43.389Z] [INFO] === BẮT ĐẦU TEST: Validate: Discount không hợp lệ ===
+[2025-06-19T05:47:45.680Z] [INFO] ✅ [PASS] Validate: Discount không hợp lệ
+[2025-06-19T05:47:45.682Z] [INFO] === BẮT ĐẦU TEST: Test thêm sản phẩm thành công ===
+[2025-06-19T05:47:53.199Z] [INFO] ✅ [PASS] Test thêm sản phẩm thành công
+[2025-06-19T05:47:53.200Z] [INFO] === BẮT ĐẦU TEST: Test chỉnh sửa sản phẩm thành công ===
+[2025-06-19T05:47:56.728Z] [INFO] ✅ [PASS] Test chỉnh sửa sản phẩm thành công
+[2025-06-19T05:47:56.729Z] [INFO] === BẮT ĐẦU TEST: Test xóa sản phẩm thành công ===
+[2025-06-19T05:48:00.682Z] [INFO] ✅ [PASS] Test xóa sản phẩm thành công
+[2025-06-19T05:48:00.682Z] [INFO] === BẮT ĐẦU TEST: Test hủy xóa sản phẩm ===
+[2025-06-19T05:48:02.477Z] [INFO] ✅ [PASS] Test hủy xóa sản phẩm
+[2025-06-19T05:48:02.477Z] [INFO] === BẮT ĐẦU TEST: Test thay đổi vị trí sản phẩm bằng click checkbox ===
+[2025-06-19T05:48:08.623Z] [INFO] ✅ [PASS] Test thay đổi vị trí sản phẩm bằng click checkbox
+[2025-06-19T05:48:08.624Z] [INFO] === BẮT ĐẦU TEST: Lọc trạng thái sản phẩm (Hoạt động & Dừng hoạt động) ===
+[2025-06-19T05:48:26.767Z] [INFO] ✅ [PASS] Lọc trạng thái sản phẩm (Hoạt động & Dừng hoạt động)
