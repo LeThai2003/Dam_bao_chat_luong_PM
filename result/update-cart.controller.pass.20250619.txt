@@ -1,0 +1,9 @@
+[12:34:12 19/6/2025] should update quantity if quantity > 0: PASSED
+[12:34:12 19/6/2025] should remove product if quantity = 0: PASSED
+[12:34:12 19/6/2025] should remove product if quantity < 0: PASSED
+[12:34:12 19/6/2025] should handle update with modifiedCount = 0: PASSED
+[12:34:12 19/6/2025] should handle delete with modifiedCount = 0: PASSED
+[12:34:12 19/6/2025] should handle database error during update: PASSED
+[12:34:12 19/6/2025] should not update if cartId is missing: PASSED
+[12:34:12 19/6/2025] should not update if productId is missing: PASSED
+[12:34:12 19/6/2025] should not update if quantity is missing: PASSED

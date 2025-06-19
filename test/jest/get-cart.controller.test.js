@@ -1,3 +1,41 @@
+const fs = require('fs');
+const path = require('path');
+
+// Tạo thư mục result nếu chưa có
+const resultDir = path.join(__dirname, '../../result');
+if (!fs.existsSync(resultDir)) {
+    fs.mkdirSync(resultDir);
+}
+
+const fileBase = 'get-cart.controller';
+const dateStr = new Date().toISOString().slice(0,10).replace(/-/g, ''); // YYYYMMDD
+const passFile = path.join(resultDir, `${fileBase}.pass.${dateStr}.txt`);
+const failFile = path.join(resultDir, `${fileBase}.fail.${dateStr}.txt`);
+fs.writeFileSync(passFile, '');
+fs.writeFileSync(failFile, '');
+
+function logResult(message, isPass) {
+    const now = new Date().toLocaleString('vi-VN', { hour12: false });
+    const line = `[${now}] ${message}\n`;
+    if (isPass) {
+        fs.appendFileSync(passFile, line);
+    } else {
+        fs.appendFileSync(failFile, line);
+    }
+}
+
+function testWithLog(name, fn) {
+    it(name, async () => {
+        try {
+            await fn();
+            logResult(`${name}: PASSED`, true);
+        } catch (err) {
+            logResult(`${name}: FAILED - ${err.message}`, false);
+            throw err;
+        }
+    });
+}
+
 // Đặt mock lên đầu file
 const mockCartExec = jest.fn();
 const mockProductExec = jest.fn();
@@ -42,7 +80,7 @@ describe('Cart Controller - Index', () => {
     };
   });
 
-  it('should render cart page with empty cart', async () => {
+  testWithLog('should render cart page with empty cart', async () => {
     const mockCart = {
       _id: 'mock-cart-id',
       products: []
@@ -64,7 +102,7 @@ describe('Cart Controller - Index', () => {
     });
   });
 
-  it('should render cart page with products and calculate total price', async () => {
+  testWithLog('should render cart page with products and calculate total price', async () => {
     const mockCart = {
       _id: 'mock-cart-id',
       products: [{ product_id: 'product1', quantity: 2 }]
@@ -74,7 +112,7 @@ describe('Cart Controller - Index', () => {
       _id: 'product1',
       title: 'Test Product',
       price: 100,
-      discountPercentage: 0 // 👈 THÊM GIÁ TRỊ NÀY
+      discountPercentage: 0 
     };
 
     mockCartExec.mockResolvedValueOnce(mockCart);
@@ -106,7 +144,7 @@ describe('Cart Controller - Index', () => {
     });
   });
 
-  it('should handle session notes', async () => {
+  testWithLog('should handle session notes', async () => {
     const mockCart = {
       _id: 'mock-cart-id',
       products: []
@@ -127,7 +165,7 @@ describe('Cart Controller - Index', () => {
     });
   });
 
-  it('should handle multiple products with different prices and quantities', async () => {
+  testWithLog('should handle multiple products with different prices and quantities', async () => {
     const mockCart = {
       _id: 'mock-cart-id',
       products: [
