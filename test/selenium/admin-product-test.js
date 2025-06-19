@@ -8,6 +8,11 @@ const URL = 'http://localhost:3000';
 const EMAIL = 'leducthai1008@gmail.com';
 const PASSWORD = '123';
 
+const logger = require('./logger');
+
+logger.info('------------------------------Test bắt đầu-----------------------------------');
+// logger.error('Có lỗi xảy ra');
+
 let driver;
 
 let totalTests = 0;
@@ -28,15 +33,21 @@ const convertToSlug = (text) => {
 
 async function runTest(name, fn) {
   totalTests++;
+  logger.info(`=== BẮT ĐẦU TEST: ${name} ===`);
   try {
     await fn();
-    console.log(`✅ [PASS] ${name}`);
+    const msg = `✅ [PASS] ${name}`;
+    console.log(msg);
+    logger.info(msg);
     passedTests++;
   } catch (err) {
-    console.error(`❌ [FAIL] ${name}\n   → Lỗi: ${err.message}`);
+    const msg = `❌ [FAIL] ${name}\n   → Lỗi: ${err.message}`;
+    console.error(msg);
+    logger.error(msg);
     failedTests++;
   }
 }
+
 
 async function login() {
   await driver.get(`${URL}/admin/auth/login`);
@@ -80,7 +91,7 @@ async function testPagination() {
   }
 }
 
-async function searchProductWithResult(keyword = 'Áo khoác chống nắng nữ') {
+async function searchProductWithResult(keyword = 'Áo khoác') {
   await driver.get(`${URL}/admin/products`);
 
   const searchInput = await driver.findElement(By.name('keyword'));
@@ -593,7 +604,7 @@ async function runAllTests() {
     await login();
     await runTest('Truy cập trang quản lý sản phẩm', goToProductPage);
     await runTest('Phân trang hoạt động đúng', testPagination);
-    await runTest('Tìm kiếm sản phẩm - Có kết quả', () => searchProductWithResult('Áo khoác chống nắng nữ'));
+    await runTest('Tìm kiếm sản phẩm - Có kết quả', () => searchProductWithResult('Áo khoác'));
     await runTest('Tìm kiếm sản phẩm - Không có kết quả', () => searchProductNoResult('xxxxx123xyzkhongtontai'));
     await runTest('Sắp xếp sản phẩm theo giá tăng dần', sortPriceAsc);
     await runTest('Thay đổi trạng thái sản phẩm', changeStatus);

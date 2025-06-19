@@ -32,7 +32,8 @@
     "socket.io": "^4.7.5",
     "streamifier": "^0.1.1",
     "tinymce": "^7.0.1",
-    "unidecode": "^1.1.0"
+    "unidecode": "^1.1.0",
+    "winston": "^3.17.0"
   },
   "devDependencies": {
     "chai": "^5.2.0",
