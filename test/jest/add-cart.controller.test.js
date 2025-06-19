@@ -1,3 +1,41 @@
+const fs = require('fs');
+const path = require('path');
+
+// Tạo thư mục result nếu chưa có
+const resultDir = path.join(__dirname, '../../result');
+if (!fs.existsSync(resultDir)) {
+    fs.mkdirSync(resultDir);
+}
+
+const fileBase = 'add-cart.controller';
+const dateStr = new Date().toISOString().slice(0,10).replace(/-/g, ''); // YYYYMMDD
+const passFile = path.join(resultDir, `${fileBase}.pass.${dateStr}.txt`);
+const failFile = path.join(resultDir, `${fileBase}.fail.${dateStr}.txt`);
+fs.writeFileSync(passFile, '');
+fs.writeFileSync(failFile, '');
+
+function logResult(message, isPass) {
+    const now = new Date().toLocaleString('vi-VN', { hour12: false });
+    const line = `[${now}] ${message}\n`;
+    if (isPass) {
+        fs.appendFileSync(passFile, line);
+    } else {
+        fs.appendFileSync(failFile, line);
+    }
+}
+
+function testWithLog(name, fn) {
+    it(name, async () => {
+        try {
+            await fn();
+            logResult(`${name}: PASSED`, true);
+        } catch (err) {
+            logResult(`${name}: FAILED - ${err.message}`, false);
+            throw err;
+        }
+    });
+}
+
 const mockCartExec = jest.fn();
 const mockUpdateOne = jest.fn();
 
@@ -34,7 +72,7 @@ describe('Cart Controller - addPost', () => {
     };
   });
 
-  it('should update quantity if product already exists in cart', async () => {
+  testWithLog('should update quantity if product already exists in cart', async () => {
     const mockCart = {
       _id: 'mock-cart-id',
       products: [
@@ -56,7 +94,7 @@ describe('Cart Controller - addPost', () => {
     expect(res.redirect).toHaveBeenCalledWith('back');
   });
 
-  it('should add product if it does not exist in cart', async () => {
+  testWithLog('should add product if it does not exist in cart', async () => {
     const mockCart = {
       _id: 'mock-cart-id',
       products: []
@@ -83,7 +121,7 @@ describe('Cart Controller - addPost', () => {
     expect(res.redirect).toHaveBeenCalledWith('back');
   });
 
-  it('should handle error and flash error message', async () => {
+  testWithLog('should handle error and flash error message', async () => {
     mockCartExec.mockRejectedValueOnce(new Error('DB error'));
 
     await cartController.addPost(req, res);

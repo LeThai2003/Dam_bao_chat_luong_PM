@@ -1,0 +1,3 @@
+[12:34:09 19/6/2025] should update quantity if product already exists in cart: PASSED
+[12:34:09 19/6/2025] should add product if it does not exist in cart: PASSED
+[12:34:09 19/6/2025] should handle error and flash error message: PASSED

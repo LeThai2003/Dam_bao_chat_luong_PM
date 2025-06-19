@@ -1,58 +1,75 @@
+const fs = require('fs');
+fs.writeFileSync('test-pass.txt', ''); // Xóa file pass cũ mỗi lần chạy
+fs.writeFileSync('test-fail.txt', ''); // Xóa file fail cũ mỗi lần chạy
+function logResult(message, isPass) {
+    const now = new Date().toLocaleString('vi-VN', { hour12: false });
+    const line = `[${now}] ${message}\n`;
+    if (isPass) {
+        fs.appendFileSync('test-pass.txt', line);
+    } else {
+        fs.appendFileSync('test-fail.txt', line);
+    }
+}
+
+function testWithLog(name, fn) {
+    test(name, async () => {
+        try {
+            await fn();
+            logResult(`${name}: PASSED`, true);
+        } catch (err) {
+            logResult(`${name}: FAILED - ${err.message}`, false);
+            throw err;
+        }
+    });
+}
+
 const { By, until } = require('selenium-webdriver');
 const { baseUrl, sleep} = require('../setup');
 
 describe("Chosse Product Not Payment", () => {
-    test('should login', async () => { 
-        await global.driver.get(baseUrl + "user/login");
-
-        await global.driver.wait(until.elementLocated(By.css(".text-center.login-title")), 5000);
-        const title = await global.driver.findElement(By.css(".text-center.login-title"));
-        // kiem tra dung trang chua
-        expect(await title.getText()).toEqual("Đăng nhập tài khoản");
-
-        const usernameInput = await global.driver.wait(until.elementLocated(By.xpath("//input[@id='email']")), 5000);
-        const passwordInput = await global.driver.wait(until.elementLocated(By.xpath("//input[@id='password']")), 5000);
-        const loginButton = await global.driver.wait(until.elementLocated(By.xpath("//button[contains(text(),'Đăng nhập')]")), 5000);
-
-        await usernameInput.sendKeys('leducthaiamity@gmail.com');
-        await passwordInput.sendKeys('123');
-        await loginButton.click();
-
-        await global.driver.wait(until.urlContains(baseUrl), 5000);
-        const currentUrl = await global.driver.getCurrentUrl();
-        expect(currentUrl).toEqual(baseUrl);
-    })
-    test("should order item stock", async () => {
-
-        const item = "Áo khoác nam kaki hàn quốc cao cấp DYNYOUTH";
-
-        // tim search input
-        await global.driver.wait(until.elementLocated(By.css("input[placeholder='Nhập từ khóa...']")), 5000);
-        const searchInput = await global.driver.findElement(By.css("input[placeholder='Nhập từ khóa...']"));
-
-        await searchInput.sendKeys(item);
-
-        // tim search button
-        await global.driver.wait(until.elementLocated(By.xpath("//button[normalize-space()='Tìm']")), 5000);
-        const searchButton = await global.driver.findElement(By.xpath("//button[normalize-space()='Tìm']"));
-
-        await searchButton.click();
-
-        //tim item 
-        await global.driver.wait(until.elementLocated(By.xpath("//div[@class='product-item']")), 5000);
-        const itemOrder = await global.driver.findElements(By.xpath("//div[@class='product-item']"));
-
-        if( itemOrder.length == 0 ){
-            console.log("Item not found?");
-        }else{
-            await itemOrder[0].click();
-            // kiem tra con hang khong
-            await global.driver.wait(until.elementLocated(By.xpath("//p[@class='out-of-stock']")), 5000);
-            const outStock = await global.driver.findElements(By.xpath("//p[@class='out-of-stock']"));
-            expect(outStock.length).toBeGreaterThan(0);
+    testWithLog('should login', async () => {
+        try {
+            await global.driver.get(baseUrl + "user/login");
+            await global.driver.wait(until.elementLocated(By.css(".text-center.login-title")), 5000);
+            const title = await global.driver.findElement(By.css(".text-center.login-title"));
+            expect(await title.getText()).toEqual("Đăng nhập tài khoản");
+            const usernameInput = await global.driver.wait(until.elementLocated(By.xpath("//input[@id='email']")), 5000);
+            const passwordInput = await global.driver.wait(until.elementLocated(By.xpath("//input[@id='password']")), 5000);
+            const loginButton = await global.driver.wait(until.elementLocated(By.xpath("//button[contains(text(),'Đăng nhập')]")), 5000);
+            await usernameInput.sendKeys('leducthaiamity@gmail.com');
+            await passwordInput.sendKeys('123');
+            await loginButton.click();
+            await global.driver.wait(until.urlContains(baseUrl), 5000);
+            const currentUrl = await global.driver.getCurrentUrl();
+            expect(currentUrl).toEqual(baseUrl);
+        } catch (err) {
+            throw err;
         }
-    })
-    test("should order item", async () => {
+    });
+    testWithLog("should order item stock", async () => {
+        try {
+            const item = "Áo khoác nam kaki hàn quốc cao cấp DYNYOUTH";
+            await global.driver.wait(until.elementLocated(By.css("input[placeholder='Nhập từ khóa...']")), 5000);
+            const searchInput = await global.driver.findElement(By.css("input[placeholder='Nhập từ khóa...']"));
+            await searchInput.sendKeys(item);
+            await global.driver.wait(until.elementLocated(By.xpath("//button[normalize-space()='Tìm']")), 5000);
+            const searchButton = await global.driver.findElement(By.xpath("//button[normalize-space()='Tìm']"));
+            await searchButton.click();
+            await global.driver.wait(until.elementLocated(By.xpath("//div[@class='product-item']")), 5000);
+            const itemOrder = await global.driver.findElements(By.xpath("//div[@class='product-item']"));
+            if( itemOrder.length == 0 ){
+                throw new Error('Item not found');
+            }else{
+                await itemOrder[0].click();
+                await global.driver.wait(until.elementLocated(By.xpath("//p[@class='out-of-stock']")), 5000);
+                const outStock = await global.driver.findElements(By.xpath("//p[@class='out-of-stock']"));
+                expect(outStock.length).toBeGreaterThan(0);
+            }
+        } catch (err) {
+            throw err;
+        }
+    });
+    testWithLog("should order item", async () => {
         await global.driver.navigate().back();
         await global.driver.navigate().back();
         const item = "Daily Wear trượt nước Coolmate";
@@ -82,7 +99,7 @@ describe("Chosse Product Not Payment", () => {
 
         
     })
-    test("should select product quantity greater than stock quantity", async () => {
+    testWithLog("should select product quantity greater than stock quantity", async () => {
         //tim so luong item con lai
         await global.driver.wait(until.elementLocated(By.xpath("//div[contains(@class, 'inner-stock')]//span")), 5000);
         const stockElement = await global.driver.findElement(By.xpath("//div[contains(@class, 'inner-stock')]//span"));
@@ -110,7 +127,7 @@ describe("Chosse Product Not Payment", () => {
 
         expect(urlExpect).toEqual(urlActual);
     })
-    test("should add item in order", async () => {
+    testWithLog("should add item in order", async () => {
         await sleep(1000);
         // tim input stock 
         await global.driver.wait(until.elementLocated(By.xpath("//input[@name='quantity']")), 5000);
@@ -130,7 +147,7 @@ describe("Chosse Product Not Payment", () => {
 
         expect(toast.length).toBeGreaterThan(0);
     });
-    test("should navigate to checkout", async () => {
+    testWithLog("should navigate to checkout", async () => {
         //tim navigate
         await global.driver.wait(until.elementLocated(By.css("a[href='/cart']")), 5000);
         const checkoutButton = await global.driver.findElement(By.css("a[href='/cart']"));
@@ -150,7 +167,7 @@ describe("Chosse Product Not Payment", () => {
         const titleExpect = "Giỏ hàng";
         expect(titleExpect).toEqual(await checkoutTitle.getText());
     })
-    test("should choose out stock in order", async () => {
+    testWithLog("should choose out stock in order", async () => {
         //tim quantity input
         await global.driver.wait(until.elementLocated(By.xpath("//input[@name='quantity']")), 5000);
         const quantityInput = await global.driver.findElement(By.xpath("//input[@name='quantity']"));
@@ -169,7 +186,7 @@ describe("Chosse Product Not Payment", () => {
 
         expect(errorMessage.length).toBeGreaterThan(0);
     })
-    test("should remove item in order", async () => {
+    testWithLog("should remove item in order", async () => {
         //tim quantity input
         await global.driver.wait(until.elementLocated(By.xpath("//a[normalize-space()='Xóa']")), 5000);
         const removeButton = await global.driver.findElements(By.xpath("//a[normalize-space()='Xóa']"));
@@ -186,7 +203,7 @@ describe("Chosse Product Not Payment", () => {
 })
 
 describe("Choose Product And Payment", () => {
-    test("should order item", async () => {
+    testWithLog("should order item", async () => {
         await global.driver.get(baseUrl);
 
         //check logout 
@@ -224,7 +241,7 @@ describe("Choose Product And Payment", () => {
         }
     })
 
-    test("should add item in order ( not login)", async () => {
+    testWithLog("should add item in order ( not login)", async () => {
         await sleep(1000);
         // tim input stock 
         await global.driver.wait(until.elementLocated(By.xpath("//input[@name='quantity']")), 5000);
@@ -242,7 +259,7 @@ describe("Choose Product And Payment", () => {
         const currentUrl = await global.driver.getCurrentUrl();
         expect(currentUrl).toEqual(baseUrl + "user/login");
     });
-    test('should login', async () => { 
+    testWithLog('should login', async () => { 
 
         await global.driver.wait(until.elementLocated(By.css(".text-center.login-title")), 5000);
         const title = await global.driver.findElement(By.css(".text-center.login-title"));
@@ -261,7 +278,7 @@ describe("Choose Product And Payment", () => {
         const currentUrl = await global.driver.getCurrentUrl();
         expect(currentUrl).toEqual(baseUrl);
     });
-    test("choose order item", async () => {
+    testWithLog("choose order item", async () => {
 
         const item = "Daily Wear trượt nước Coolmate";
     
@@ -288,7 +305,7 @@ describe("Choose Product And Payment", () => {
         }
     })
 
-    test("should add item in order", async () => {
+    testWithLog("should add item in order", async () => {
         await sleep(1000);
         // tim input stock 
         await global.driver.wait(until.elementLocated(By.xpath("//input[@name='quantity']")), 5000);
@@ -309,7 +326,7 @@ describe("Choose Product And Payment", () => {
         expect(toast.length).toBeGreaterThan(0);
 
     });
-    test("should navigate to checkout", async () => {
+    testWithLog("should navigate to checkout", async () => {
         //tim navigate
         await global.driver.wait(until.elementLocated(By.css("a[href='/cart']")), 5000);
         const checkoutButton = await global.driver.findElement(By.css("a[href='/cart']"));
@@ -329,7 +346,7 @@ describe("Choose Product And Payment", () => {
         const titleExpect = "Giỏ hàng";
         expect(titleExpect).toEqual(await checkoutTitle.getText());
     })
-    test("should choose out stock in order", async () => {
+    testWithLog("should choose out stock in order", async () => {
         //tim quantity input
         await global.driver.wait(until.elementLocated(By.xpath("//input[@name='quantity']")), 5000);
         let quantityInput = await global.driver.findElement(By.xpath("//input[@name='quantity']"));
@@ -355,7 +372,7 @@ describe("Choose Product And Payment", () => {
 })
 
 describe("Checkout form test", () => {
-    test("should empty name", async () => {
+    testWithLog("should empty name", async () => {
         await validateForm("","","");
 
         await global.driver.wait(until.elementLocated(By.xpath("//button[contains(text(),'ĐẶT HÀNG')]")), 5000);
@@ -374,7 +391,7 @@ describe("Checkout form test", () => {
 
         expect(await toast[0].getText()).toEqual(toastExpect);
     })
-    test("should empty name ( have sdt)", async () => {
+    testWithLog("should empty name ( have sdt)", async () => {
         await validateForm("","0779127667","");
 
         await global.driver.wait(until.elementLocated(By.xpath("//button[contains(text(),'ĐẶT HÀNG')]")), 5000);
@@ -393,7 +410,7 @@ describe("Checkout form test", () => {
 
         expect(await toast[0].getText()).toEqual(toastExpect);
     })
-    test("should empty name ( have address)", async () => {
+    testWithLog("should empty name ( have address)", async () => {
         await validateForm("","","hoai@gmail.com");
 
         await global.driver.wait(until.elementLocated(By.xpath("//button[contains(text(),'ĐẶT HÀNG')]")), 5000);
@@ -412,7 +429,7 @@ describe("Checkout form test", () => {
 
         expect(await toast[0].getText()).toEqual(toastExpect);
     })
-    test("should no format name ( have address)", async () => {
+    testWithLog("should no format name ( have address)", async () => {
         await validateForm("123","","");
 
         await global.driver.wait(until.elementLocated(By.xpath("//button[contains(text(),'ĐẶT HÀNG')]")), 5000);
@@ -431,7 +448,7 @@ describe("Checkout form test", () => {
 
         expect(await toast[0].getText()).toEqual(toastExpect);
     })
-    test("should empty sdt ( have name)", async () => {
+    testWithLog("should empty sdt ( have name)", async () => {
         await validateForm("Dao Phan Quoc Hoai","","");
 
         await global.driver.wait(until.elementLocated(By.xpath("//button[contains(text(),'ĐẶT HÀNG')]")), 5000);
@@ -450,7 +467,7 @@ describe("Checkout form test", () => {
 
         expect(await toast[0].getText()).toEqual(toastExpect);
     })
-    test("should empty sdt ( have name and address)", async () => {
+    testWithLog("should empty sdt ( have name and address)", async () => {
         await validateForm("Dao Phan Quoc Hoai","","address");
 
         await global.driver.wait(until.elementLocated(By.xpath("//button[contains(text(),'ĐẶT HÀNG')]")), 5000);
@@ -469,7 +486,7 @@ describe("Checkout form test", () => {
 
         expect(await toast[0].getText()).toEqual(toastExpect);
     })
-    test("should empty address ( have name and sdt)", async () => {
+    testWithLog("should empty address ( have name and sdt)", async () => {
         await validateForm("Dao Phan Quoc Hoai","0779127667","");
 
         await global.driver.wait(until.elementLocated(By.xpath("//button[contains(text(),'ĐẶT HÀNG')]")), 5000);
@@ -488,7 +505,7 @@ describe("Checkout form test", () => {
 
         expect(await toast[0].getText()).toEqual(toastExpect);
     })
-    test("should accept order", async () => {
+    testWithLog("should accept order", async () => {
         await validateForm("Dao Phan Quoc Hoai","0779127667","address");
 
         await global.driver.wait(until.elementLocated(By.xpath("//button[contains(text(),'ĐẶT HÀNG')]")), 5000);

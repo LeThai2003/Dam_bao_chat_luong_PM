@@ -1,0 +1,4 @@
+[12:34:21 19/6/2025] should render cart page with empty cart: PASSED
+[12:34:21 19/6/2025] should render cart page with products and calculate total price: PASSED
+[12:34:21 19/6/2025] should handle session notes: PASSED
+[12:34:21 19/6/2025] should handle multiple products with different prices and quantities: PASSED

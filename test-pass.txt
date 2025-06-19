@@ -1,0 +1,23 @@
+[12:38:58 19/6/2025] should login: PASSED
+[12:39:00 19/6/2025] should order item stock: PASSED
+[12:39:02 19/6/2025] should order item: PASSED
+[12:39:04 19/6/2025] should select product quantity greater than stock quantity: PASSED
+[12:39:07 19/6/2025] should add item in order: PASSED
+[12:39:11 19/6/2025] should navigate to checkout: PASSED
+[12:39:16 19/6/2025] should choose out stock in order: PASSED
+[12:39:17 19/6/2025] should remove item in order: PASSED
+[12:39:27 19/6/2025] should order item: PASSED
+[12:39:29 19/6/2025] should add item in order ( not login): PASSED
+[12:39:32 19/6/2025] should login: PASSED
+[12:39:34 19/6/2025] choose order item: PASSED
+[12:39:37 19/6/2025] should add item in order: PASSED
+[12:39:41 19/6/2025] should navigate to checkout: PASSED
+[12:39:44 19/6/2025] should choose out stock in order: PASSED
+[12:39:47 19/6/2025] should empty name: PASSED
+[12:39:51 19/6/2025] should empty name ( have sdt): PASSED
+[12:39:54 19/6/2025] should empty name ( have address): PASSED
+[12:39:58 19/6/2025] should no format name ( have address): PASSED
+[12:40:03 19/6/2025] should empty sdt ( have name): PASSED
+[12:40:07 19/6/2025] should empty sdt ( have name and address): PASSED
+[12:40:10 19/6/2025] should empty address ( have name and sdt): PASSED
+[12:40:18 19/6/2025] should accept order: PASSED
